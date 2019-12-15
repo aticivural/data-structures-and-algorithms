@@ -1,6 +1,6 @@
 package com.vural.datastructures.chapter3;
 
-public class SinglyLinkedList<E> {
+public class SinglyLinkedList<E> implements Cloneable{
 
     private Node<E> head = null;
     private Node<E> tail = null;
@@ -78,5 +78,39 @@ public class SinglyLinkedList<E> {
         public void setNext(Node<E> n) {
             next = n;
         }
+    }
+
+    public boolean equals(Object o){
+        if (o == null) return false;
+        if (getClass() != o.getClass()) return false;
+        SinglyLinkedList other = (SinglyLinkedList) o;
+        if (size != other.size) return false;
+        Node walkA = this.head;
+        Node walkB = other.head;
+        while (walkA != null){
+            if (!walkA.getElement().equals(walkB.getElement())){
+                return false;
+            }
+            walkA = walkA.getNext();
+            walkB = walkB.getNext();
+        }
+        return true;
+    }
+
+    @Override
+    protected SinglyLinkedList<E> clone() throws CloneNotSupportedException {
+        SinglyLinkedList<E> other = (SinglyLinkedList<E>) super.clone();
+        if (size > 0){
+            other.head = new Node<E>(head.getElement(),null);
+            Node<E> walk = head.getNext();
+            Node<E> otherTail = other.head;
+            while (walk != null){
+                Node<E> newest = new Node<E>(walk.getElement(), null);
+                otherTail.setNext(newest);
+                otherTail = newest;
+                walk = walk.getNext();
+            }
+        }
+        return other;
     }
 }
