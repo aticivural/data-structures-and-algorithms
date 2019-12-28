@@ -1,6 +1,8 @@
 package com.vural.datastructures.chapter3;
 
-public class DoublyLinkedList<E> {
+import com.vural.datastructures.chapter6.Deque;
+
+public class DoublyLinkedList<E> implements Deque<E> {
 
     private Node<E> header;
     private Node<E> trailer;

@@ -2,7 +2,7 @@ package com.vural.datastructures.chapter3;
 
 public class Util {
 
-    //O(n)
+    //O(n^2)
     public static void insertionSort(char[] data) {
         int n = data.length;
         for (int k = 1; k < n; k++) {

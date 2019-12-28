@@ -23,7 +23,7 @@ public class ArrayDeque<E> implements Deque<E> {
 
     @Override
     public boolean isEmpty() {
-        return (size == 0);
+        return size == 0;
     }
 
     @Override
@@ -39,23 +39,27 @@ public class ArrayDeque<E> implements Deque<E> {
     }
 
     @Override
-    public void addFirst(E e) throws IllegalStateException {
-        if (isFull()) throw new IllegalStateException("Queue is full");
-
-        if (isEmpty()) {
-            head = data.length - 1;
+    public void addFirst(E e) {
+        if (isFull()) throw new IllegalStateException("Deque is full");
+        if (isInitial()) {
+            head = 0;
         } else {
-            head = head - 1;
+            head = (head - 1 + data.length) % data.length;
         }
-
         data[head] = e;
+        size++;
+
     }
 
     @Override
     public void addLast(E e) {
-        if (size == data.length) throw new IllegalStateException("Queue is full");
-        int avail = (head - 1 + data.length) % data.length;
-        data[avail] = e;
+        if (isFull()) throw new IllegalStateException("Deque is full");
+        if (isInitial()) {
+            head = 0;
+        } else {
+            tail = (tail + 1) % data.length;
+        }
+        data[tail] = e;
         size++;
     }
 
@@ -64,20 +68,26 @@ public class ArrayDeque<E> implements Deque<E> {
         if (isEmpty()) return null;
         E answer = data[head];
         data[head] = null;
-        head = (head + 1) % data.length;
-        size--;
+        head = (head + 1)% data.length;
+        size --;
         return answer;
     }
 
     @Override
     public E removeLast() {
         if (isEmpty()) return null;
-        E answer = data[head - 1 + data.length];
-        data[head - 1 + data.length] = null;
-        return null;
+        E answer = data[tail];
+        data[tail] = null;
+        tail = (tail - 1 + data.length) % data.length;
+        size --;
+        return answer;
+    }
+
+    private boolean isInitial() {
+        return head == -1 && tail == 0;
     }
 
     private boolean isFull() {
-        return ((head == 0 && tail == data.length - 1) || (head == tail + 1));
+        return size == data.length;
     }
 }

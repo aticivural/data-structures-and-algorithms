@@ -11,8 +11,8 @@ public class Util {
             a[i] = buffer.pop();
         }
     }
-
-    public static boolean isHTMLMatced(String html) {
+    //Tests if every opening tag has a matching closing tag in HTML string.
+    public static boolean isHTMLMatched(String html) {
         Stack<String> buffer = new LinkedStack<>();
         int j = html.indexOf('<');
         while (j != -1) {
