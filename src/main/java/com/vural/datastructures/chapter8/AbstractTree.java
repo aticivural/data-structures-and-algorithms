@@ -63,4 +63,56 @@ public abstract class AbstractTree<E> implements Tree<E> {
         }
         return snapshot;
     }
+
+    public static <E> void printPreorderIndent(Tree<E> t, Position<E> p, int d) {
+        System.out.println(spaces(2 * d) + p.getElement());
+        for (Position<E> c : t.children(p)) {
+            printPreorderIndent(t, c, d + 1);
+        }
+    }
+
+    public static <E> void printPreorderLabeled(Tree<E> t, Position<E> p, ArrayList<Integer> path) {
+        int d = path.size();
+        System.out.println(spaces(2 * d));
+        for (int j = 0; j < d; j++) {
+            System.out.print(path.get(j) + (j == d - 1 ? " " : "."));
+        }
+        System.out.println(p.getElement());
+        path.add(1);
+        for (Position<E> c : t.children(p)) {
+            printPreorderLabeled(t, c, path);
+            path.set(d, 1 + path.get(d));
+        }
+        path.remove(d);
+    }
+
+    private static String spaces(int length) {
+        String spaces = "";
+        for (int i = 0; i < length; i++) {
+            spaces += " ";
+        }
+        return spaces;
+    }
+
+    public int diskSpace(Tree<Integer> t, Position<Integer> p) {
+        int subTotal = p.getElement();
+        for (Position<Integer> c : t.children(p)) {
+            subTotal += diskSpace(t, c);
+        }
+        return subTotal;
+    }
+
+    public static <E> void parenthesize(Tree<E> t, Position<E> p) {
+        System.out.print(p.getElement());
+        if (t.isInternal(p)) {
+            boolean firstTime = true;
+            for (Position<E> c : t.children(p)) {
+                System.out.print((firstTime ? " (" : ", "));
+                firstTime = false;
+                parenthesize(t, c);
+            }
+            System.out.println(")");
+        }
+    }
+
 }
