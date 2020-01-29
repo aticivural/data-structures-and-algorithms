@@ -30,4 +30,6 @@ public interface PositionalList<E> extends Iterable<E>{
 
     Iterator<E> iterator();
 
+    Iterable<Position<E>> positions();
+
 }
