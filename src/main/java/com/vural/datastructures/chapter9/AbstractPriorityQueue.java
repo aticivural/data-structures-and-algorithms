@@ -5,30 +5,30 @@ import java.util.Comparator;
 public abstract class AbstractPriorityQueue<K, V> implements PriorityQueue<K, V> {
 
     protected static class PQEntry<K, V> implements Entry<K, V> {
-        private K k;
-        private V v;
+        private K key;
+        private V value;
 
         public PQEntry(K key, V value) {
-            this.k = key;
-            this.v = value;
+            this.key = key;
+            this.value = value;
         }
 
         @Override
         public K getKey() {
-            return k;
+            return key;
         }
 
         @Override
         public V getValue() {
-            return v;
+            return value;
         }
 
-        protected void setK(K k) {
-            this.k = k;
+        protected void setKey(K key) {
+            this.key = key;
         }
 
-        protected void setV(V v) {
-            this.v = v;
+        protected void setValue(V value) {
+            this.value = value;
         }
     }
 

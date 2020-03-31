@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+//TODO implement missing methods(like add())
 public class ArrayList<E> implements List<E> {
     private static int CAPACITY = 16;
     private E[] data;
@@ -94,16 +95,16 @@ public class ArrayList<E> implements List<E> {
 
         @Override
         public void remove() {
-            if (!removable){
+            if (!removable) {
                 throw new IllegalStateException("nothing to remove");
             }
-            ArrayList.this.remove(j-1);
+            ArrayList.this.remove(j - 1);
             j--;
             removable = false;
         }
     }
 
-    public Iterator<E> iterator(){
+    public Iterator<E> iterator() {
         return new ArrayIterator();
     }
 }
