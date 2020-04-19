@@ -33,6 +33,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
             return 1 + depth(parent(p));
     }
 
+    // O(n^2)
     private int heightBad() {
         int h = 0;
         for (Position<E> p : positions())
@@ -41,6 +42,7 @@ public abstract class AbstractTree<E> implements Tree<E> {
         return h;
     }
 
+    // O(n)
     public int height(Position<E> p) {
         int h = 0;
         for (Position<E> c : children(p))
