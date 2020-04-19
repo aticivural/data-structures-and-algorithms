@@ -47,7 +47,7 @@ public abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> {
     @Override
     public V put(K key, V value) {
         V answer = bucketPut(hashValue(key), key, value);
-        if (numberOfEntries > capacity / 2) {
+        if (numberOfEntries > capacity / 2) {       // keep load factor <= 0.5
             resize(2 * capacity - 1);
         }
         return answer;
