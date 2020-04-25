@@ -6,6 +6,7 @@ import com.vural.datastructures.chapter8.LinkedBinaryTree;
 import com.vural.datastructures.chapter9.Entry;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
 
@@ -13,6 +14,11 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
 
     public TreeMap() {
         super();
+        tree.addRoot(null);
+    }
+
+    public TreeMap(Comparator<K> comparator) {
+        super(comparator);
         tree.addRoot(null);
     }
 
@@ -290,13 +296,13 @@ public class TreeMap<K, V> extends AbstractSortedMap<K, V> {
         return parent(walk);
     }
 
-    protected void rebalanceInsert(Position<Entry<K, V>> p) {
+    protected void rebalanceInsert(Position<Entry<K, V>> position) {
     }
 
-    protected void rebalanceDelete(Position<Entry<K, V>> p) {
+    protected void rebalanceDelete(Position<Entry<K, V>> position) {
     }
 
-    protected void rebalanceAccess(Position<Entry<K, V>> p) {
+    protected void rebalanceAccess(Position<Entry<K, V>> position) {
     }
 
 
